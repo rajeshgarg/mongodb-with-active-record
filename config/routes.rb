@@ -1,4 +1,6 @@
 MongodbApp::Application.routes.draw do
+  resources :stories
+
   resources :mongo_posts
 
   resources :users

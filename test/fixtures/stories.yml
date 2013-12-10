@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  url: MyString
+  voters_list: MyString
+  slug: MyString
+  relevance: 1
+  username: MyString
+  user_id: 1
+
+two:
+  title: MyString
+  url: MyString
+  voters_list: MyString
+  slug: MyString
+  relevance: 1
+  username: MyString
+  user_id: 1
