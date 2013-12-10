@@ -1,0 +1,51 @@
+
+gem 'bson_ext'
+gem 'mongo_mapper'
+Install the gems
+
+bundle install
+Generate a config file for mongo_mapper (config/mongo.yml)
+
+rails g mongo_mapper:config
+Change the values as required in the YML file
+
+defaults: &defaults
+  host: 127.0.0.1
+  port: 27017
+
+development:
+  <<: *defaults
+  database: demos_development
+Now, let’s create the model which will be stored in MongoDB
+
+class MongoPost
+  include MongoMapper::Document
+
+  key :title, String
+  key :content, String
+
+  timestamps!
+
+  validates_presence_of :title, :content
+end
+To create the controller and views that interact with this model, let’s simply generate the scaffolding using
+
+rails g scaffold mongo_post title:string content:string
+This generates an ActiveRecord migration too, which we need to delete! It will also prompt you to keep or overwrite the existing model file (app/models/mongo_post.rb). Obviously, we need to keep the existing file.
+
+You can now run the app and visit http://localhost:3000/mongo_posts to create and edit posts that get stored in MongoDB. After saving a post, check to see that it exists in MongoDB:
+
+ashwinp@app2:~/projects/demos$ mongo
+MongoDB shell version: 1.4.4
+url: test
+connecting to: test
+type "help" for help
+> use demos_development
+switched to db demos_development
+> show collections
+mongo_posts
+system.indexes
+> db.mongo_posts.find()
+{ "_id" : ObjectId("51dac29aec8d83171a000005"), "title" : "hello world", "content" : "how are you?", "created_at" : "Mon Jul 08 2013 05:46:02 GMT-0800 (AHST)", "updated_at" : "Mon Jul 08 2013 05:46:02 GMT-0800 (AHST)" }
+{ "_id" : ObjectId("51dac2c5ec8d83171a00000a"), "title" : "mongo demo", "content" : "uses the mongo_mapper gem", "created_at" : "Mon Jul 08 2013 05:46:45 GMT-0800 (AHST)", "updated_at" : "Mon Jul 08 2013 05:46:45 GMT-0800 (AHST)" }
+> 

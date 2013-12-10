@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @mongo_post.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @mongo_post.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_mongo_post_path(@mongo_post) %> |
+<%= link_to 'Back', mongo_posts_path %>
